@@ -1,0 +1,44 @@
+{% assign found_match = false %}
+
+{% for block in section.blocks %}
+  {% assign title = block.settings.page %}
+  {% if page.handle == title %}
+  {% assign found_match = true %}
+    {% include 'page-header' %}
+  {% endif %}
+{% endfor %}
+
+{% if found_match == false %}
+  {% include 'general-header' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Page Headers",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "general-header",
+      "label": "General Header Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "headers",
+      "name": "Headers",
+      "settings": [
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Page"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Header Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
